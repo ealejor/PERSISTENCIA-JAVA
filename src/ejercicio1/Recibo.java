@@ -22,4 +22,49 @@ public class Recibo {
         this.nProd = nProd;
         this.c = new Cliente();
     }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public int getnProd() {
+        return nProd;
+    }
+
+    public void setnProd(int nProd) {
+        this.nProd = nProd;
+    }
+
+    public Item[] getIt() {
+        return it;
+    }
+
+    public void setIt(Item item) {
+        for (int i = 0; i < nProd; i++) {
+            if (it[i] == null){
+                it[i] = item;
+                break;
+            }
+        }
+    }
+
+    public int[] getDesc() {
+        return desc;
+    }
+
+    public void setDesc(int[] desc) {
+        this.desc = desc;
+    }
+
+    public Cliente getC() {
+        return c;
+    }
+
+    public void setC(Cliente c) {
+        this.c = c;
+    }
 }

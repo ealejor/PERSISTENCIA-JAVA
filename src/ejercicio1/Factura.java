@@ -3,8 +3,8 @@ package ejercicio1;
 public class Factura extends Recibo {
     private int nit;
 
-    public Factura(int nit) {
-        super();
+    public Factura(int num, int nProd, int nit) {
+        super(num, nProd);
         this.nit = nit;
     }
 

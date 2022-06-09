@@ -9,6 +9,13 @@ public class Main {
         Item p4 = new Item("Lavadora", 9000);
         Item p5 = new Item("Sprite", 2);
 
-        Factura factura1 = new Factura();
+        Factura factura1 = new Factura(1000, 2, 148325);
+        factura1.setIt(p1);
+        factura1.setIt(p2);
+
+        Factura factura2 = new Factura(2000, 3, 852145);
+        factura2.setIt(p3);
+        factura2.setIt(p4);
+        factura2.setIt(p5);
     }
 }
