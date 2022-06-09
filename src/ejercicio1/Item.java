@@ -2,9 +2,9 @@ package ejercicio1;
 
 public class Item {
     private String nom;
-    private double precio;
+    private int precio;
 
-    public Item(String nom, double precio) {
+    public Item(String nom, int precio) {
         this.nom = nom;
         this.precio = precio;
     }
@@ -27,11 +27,11 @@ public class Item {
         this.nom = nom;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 }
