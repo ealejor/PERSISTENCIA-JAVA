@@ -22,6 +22,7 @@ public class Recibo {
         this.num = num;
         this.nProd = nProd;
         this.c = new Cliente();
+        this.desc[0] = 10;
     }
 
     public void mostrar() {
