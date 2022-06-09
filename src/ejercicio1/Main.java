@@ -23,5 +23,9 @@ public class Main {
         factura2.setIt(p4);
         factura2.setIt(p5);
         factura2.mostrar();
+
+        System.out.println("\na) Sobrecargar un método para determinar a nombre");
+        System.out.println("de quien está la factura con el mayor total a pagar.");
+        factura1.mostrar(factura2);
     }
 }
