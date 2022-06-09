@@ -35,7 +35,7 @@ public class Factura extends Recibo {
         if (f1 > f2){
             System.out.println("Resp: " + c.toString() + " con un total de " + f1);
         } else if (f2 > f1){
-            System.out.println("Resp: " + factura.getC().toString() + " con un total de " + f1);
+            System.out.println("Resp: " + factura.getC().toString() + " con un total de " + f2);
         } else {
             System.out.println("Resp: Los dos clientes tienen el mismo precio para pagar.");
         }
