@@ -22,7 +22,11 @@ public class Recibo {
         this.num = num;
         this.nProd = nProd;
         this.c = new Cliente();
-        this.desc[0] = 10;
+        this.desc[0] = 10; // descuento para p1
+        this.desc[1] = 5; // descuento para p2
+        this.desc[2] = 20; // descuento para p3
+        this.desc[3] = 2; // descuento para p4
+        this.desc[4] = 25; // descuento para p5
     }
 
     public void mostrar() {
