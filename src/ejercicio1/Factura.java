@@ -12,6 +12,12 @@ public class Factura extends Recibo {
         super();
     }
 
+    public void mostrar(){
+        System.out.println("--------------------------------------");
+        System.out.println("NIT: " + nit);
+        super.mostrar();
+    }
+
     @Override
     public String toString() {
         return "Factura{" +

@@ -10,12 +10,18 @@ public class Main {
         Item p5 = new Item("Sprite", 2);
 
         Factura factura1 = new Factura(1000, 2, 148325);
+        Cliente cliente1 = new Cliente("Eduardo", 1254);
+        factura1.setC(cliente1);
         factura1.setIt(p1);
         factura1.setIt(p2);
+        factura1.mostrar();
 
         Factura factura2 = new Factura(2000, 3, 852145);
+        Cliente cliente2 = new Cliente("María", 7856);
+        factura2.setC(cliente2);
         factura2.setIt(p3);
         factura2.setIt(p4);
         factura2.setIt(p5);
+        factura2.mostrar();
     }
 }

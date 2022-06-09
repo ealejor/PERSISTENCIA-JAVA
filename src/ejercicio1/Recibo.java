@@ -7,7 +7,8 @@ public class Recibo {
     protected int[] desc = new int[50];
     protected Cliente c;
 
-    public Recibo(){}
+    public Recibo() {
+    }
 
     public Recibo(int num, int nProd, Item[] it, int[] desc, Cliente c) {
         this.num = num;
@@ -17,10 +18,21 @@ public class Recibo {
         this.c = c;
     }
 
-    public Recibo(int num, int nProd){
+    public Recibo(int num, int nProd) {
         this.num = num;
         this.nProd = nProd;
         this.c = new Cliente();
+    }
+
+    public void mostrar() {
+        System.out.println("Número de factura: " + num);
+        System.out.print("Cliente: " + c.toString());
+        System.out.println("Número de productos: " + nProd);
+        for (int i = 0; i < nProd; i++) {
+            if (it[i] != null){
+                System.out.println((i + 1) + ": " + it[i].toString());
+            }
+        }
     }
 
     public int getNum() {
@@ -45,7 +57,7 @@ public class Recibo {
 
     public void setIt(Item item) {
         for (int i = 0; i < nProd; i++) {
-            if (it[i] == null){
+            if (it[i] == null) {
                 it[i] = item;
                 break;
             }
