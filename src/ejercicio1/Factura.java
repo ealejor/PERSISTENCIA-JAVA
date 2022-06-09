@@ -1,6 +1,8 @@
 package ejercicio1;
 
-public class Factura extends Recibo {
+import java.io.Serializable;
+
+public class Factura extends Recibo implements Serializable {
     private int nit;
 
     public Factura(int num, int nProd, int nit) {
@@ -39,6 +41,11 @@ public class Factura extends Recibo {
         } else {
             System.out.println("Resp: Los dos clientes tienen el mismo precio para pagar.");
         }
+    }
+
+    // b)
+    public void mayorDescuento(){
+
     }
 
     @Override

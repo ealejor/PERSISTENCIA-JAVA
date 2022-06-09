@@ -27,5 +27,11 @@ public class Main {
         System.out.println("\na) Sobrecargar un método para determinar a nombre");
         System.out.println("de quien está la factura con el mayor total a pagar.");
         factura1.mostrar(factura2);
+
+        System.out.println("\nc) Realizar la persistencia de la clase Factura y listar...");
+        ArchivoFactura archivoFactura = new ArchivoFactura("factura.dat");
+        archivoFactura.agregar(factura1);
+        archivoFactura.agregar(factura2);
+        archivoFactura.listar(148325);
     }
 }

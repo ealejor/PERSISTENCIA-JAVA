@@ -1,6 +1,8 @@
 package ejercicio1;
 
-public class Recibo {
+import java.io.Serializable;
+
+public class Recibo implements Serializable {
     protected int num;
     protected int nProd;
     protected Item[] it = new Item[50];
