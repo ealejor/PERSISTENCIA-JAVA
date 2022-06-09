@@ -25,12 +25,12 @@ public class ArchivoFactura {
     public void agregar(Factura factura) {
         ObjectOutputStream oos = null;
         try {
-//            if (file.length() > 0){
-//                oos = new MyObjectOutputStream(new FileOutputStream(file, true));
-//            } else {
-//                oos = new ObjectOutputStream(new FileOutputStream(file));
-//            }
-            oos = new ObjectOutputStream(new FileOutputStream(file));
+            if (file.length() > 0){
+                oos = new MyObjectOutputStream(new FileOutputStream(file, true));
+            } else {
+                oos = new ObjectOutputStream(new FileOutputStream(file));
+            }
+            // oos = new ObjectOutputStream(new FileOutputStream(file));
             oos.writeObject(factura);
             oos.flush();
             oos.close();
@@ -50,10 +50,11 @@ public class ArchivoFactura {
             while (true) {
                 fac = (Factura) ois.readObject();
                 //fac.mostrar();
+                //System.out.println(fac.getNit());
                 if (fac.getNit() == X){
                     System.out.println("El nit " + X + " pertenece al cliente " + fac.getC());
                 } else {
-                    System.out.println("No existe el cliente con nit " + X);
+                    //System.out.println("No existe el cliente con nit " + X);
                 }
             }
         } catch (EOFException e) {
