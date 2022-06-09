@@ -1,4 +1,4 @@
 package ejercicio1;
 
-public class Avion {
+public class Factura {
 }
