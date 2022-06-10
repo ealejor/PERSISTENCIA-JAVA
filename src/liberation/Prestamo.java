@@ -1,7 +1,5 @@
 package liberation;
 
-import java.util.Arrays;
-
 public class Prestamo {
     private Libro[] L;
     private int ci;
@@ -10,22 +8,21 @@ public class Prestamo {
     private String fechaPrestamo;
     private String fechaDevolucion;
 
-    public Prestamo(int ci, int nroLibros, String nombreLector, String fechaPrestamo, String fechaDevolucion) {
-        L = new Libro[nroLibros];
-        this.ci = ci;
-        this.nroLibros = nroLibros;
-        this.nombreLector = nombreLector;
-        this.fechaPrestamo = fechaPrestamo;
-        this.fechaDevolucion = fechaDevolucion;
+    private Lector lector;
+
+    public Prestamo(Lector lector) {
+        this.lector = lector;
+        this.ci = lector.getCi();
+        this.nombreLector = lector.getNombre();
     }
 
-    public Prestamo() {
-    }
-
-    public void mostrar() {
+    @Override
+    public String toString() {
         String libros = "";
         for (int i = 0; i < nroLibros; i++) {
-            libros += L[i].toString() + "\n";
+            if (L[i] != null) {
+                libros += L[i].toString() + "\n";
+            }
         }
         String a = "";
         a += "Prestamo{\n" +
@@ -35,20 +32,9 @@ public class Prestamo {
                 "\tfechaPrestamo=" + fechaPrestamo + "\n" +
                 "\tfechaDevolucion=" + fechaDevolucion + "\n" +
                 "\tLibros:" + "\n" +
-                "\t\t" + libros + "\n" +
+                "\t\t" + libros +
                 "}";
-    }
-
-    @Override
-    public String toString() {
-        return "Prestamo{" +
-                "L=" + Arrays.toString(L) +
-                ", ci=" + ci +
-                ", nroLibros=" + nroLibros +
-                ", nombreLector='" + nombreLector + '\'' +
-                ", fechaPrestamo='" + fechaPrestamo + '\'' +
-                ", fechaDevolucion='" + fechaDevolucion + '\'' +
-                '}';
+        return a;
     }
 
     public Libro[] getL() {
@@ -78,6 +64,7 @@ public class Prestamo {
 
     public void setNroLibros(int nroLibros) {
         this.nroLibros = nroLibros;
+        this.L = new Libro[nroLibros];
     }
 
     public String getNombreLector() {
@@ -102,5 +89,13 @@ public class Prestamo {
 
     public void setFechaDevolucion(String fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
+    }
+
+    public Lector getLector() {
+        return lector;
+    }
+
+    public void setLector(Lector lector) {
+        this.lector = lector;
     }
 }
