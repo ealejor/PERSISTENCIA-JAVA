@@ -10,7 +10,7 @@ public class Biblioteca implements Serializable {
     private Prestamo[] prestamos;
     private Reserva[] reservas;
 
-    Biblioteca(String bibliotecario, int nroReservas, int nroPrestamos){
+    public Biblioteca(String bibliotecario, int nroReservas, int nroPrestamos){
         this.bibliotecario = new Bibliotecario(bibliotecario);
         this.nroReservas = nroReservas;
         this.nroPrestamos = nroPrestamos;
