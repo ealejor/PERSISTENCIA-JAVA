@@ -8,7 +8,7 @@ public class Biblioteca {
     private Prestamo[] prestamos;
     private Reserva[] reservas;
 
-    private Biblioteca(String bibliotecario, int nroReservas, int nroPrestamos){
+    Biblioteca(String bibliotecario, int nroReservas, int nroPrestamos){
         this.bibliotecario = new Bibliotecario(bibliotecario);
         this.nroReservas = nroReservas;
         this.nroPrestamos = nroPrestamos;

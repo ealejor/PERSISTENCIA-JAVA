@@ -39,4 +39,12 @@ public class Lector {
     public void setPrestamo(Prestamo prestamo) {
         this.prestamo = prestamo;
     }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
 }
