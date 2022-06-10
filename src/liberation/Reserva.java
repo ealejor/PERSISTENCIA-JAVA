@@ -1,6 +1,8 @@
 package liberation;
 
-public class Reserva {
+import java.io.Serializable;
+
+public class Reserva implements Serializable {
     private Libro[] L;
     private int ci;
     private int nroLibros;

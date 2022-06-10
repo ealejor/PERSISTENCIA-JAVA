@@ -15,6 +15,9 @@ public class Main {
         archivoBiblioteca.agregar(biblioteca3);
 
         Lector lector1 = new Lector("Samuel", 125);
+        lector1.getPrestamo().setNroLibros(2);
+        lector1.getPrestamo().setFechaPrestamo("12/05/22");
+        lector1.getPrestamo().setFechaDevolucion("01/06/22");
         Lector lector2 = new Lector("Cinthia", 358);
         Lector lector3 = new Lector("Kevin", 785);
         Lector lector4 = new Lector("Ademar", 127);
@@ -22,11 +25,12 @@ public class Main {
         Lector lector6 = new Lector("Felipe", 357);
         ArchivoLector archivoLector = new ArchivoLector("lector.txt");
         archivoLector.agregar(lector1);
-        archivoLector.agregar(lector2);
-        archivoLector.agregar(lector3);
-        archivoLector.agregar(lector4);
-        archivoLector.agregar(lector5);
-        archivoLector.agregar(lector6);
+        archivoLector.listar();
+        //archivoLector.agregar(lector2);
+        //archivoLector.agregar(lector3);
+        //archivoLector.agregar(lector4);
+        //archivoLector.agregar(lector5);
+        //archivoLector.agregar(lector6);
 
     }
 }

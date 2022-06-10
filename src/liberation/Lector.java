@@ -1,6 +1,8 @@
 package liberation;
 
-public class Lector {
+import java.io.Serializable;
+
+public class Lector implements Serializable {
     private String nombre;
     private int ci;
     private Prestamo prestamo;
@@ -13,7 +15,14 @@ public class Lector {
         this.reserva = new Reserva(this);
     }
 
-    public Lector() {
+    @Override
+    public String toString() {
+        return "Lector{" +
+                "nombre='" + nombre + '\'' +
+                ", ci=" + ci +
+                ", prestamo=" + prestamo +
+                ", reserva=" + reserva +
+                '}';
     }
 
     public String getNombre() {

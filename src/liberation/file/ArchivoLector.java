@@ -50,6 +50,7 @@ public class ArchivoLector {
             ois = new ObjectInputStream(new FileInputStream(file));
             while (true) {
                 lector = (Lector) ois.readObject();
+                System.out.println(lector);
             }
         } catch (EOFException e) {
             try {

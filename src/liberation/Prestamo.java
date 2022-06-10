@@ -1,6 +1,8 @@
 package liberation;
 
-public class Prestamo {
+import java.io.Serializable;
+
+public class Prestamo implements Serializable {
     private Libro[] L;
     private int ci;
     private int nroLibros;

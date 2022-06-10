@@ -1,6 +1,8 @@
 package liberation;
 
-public class Biblioteca {
+import java.io.Serializable;
+
+public class Biblioteca implements Serializable {
     private String nombre;
     private Bibliotecario bibliotecario;
     private int nroReservas;
