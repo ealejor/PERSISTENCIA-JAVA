@@ -23,8 +23,20 @@ public class Prestamo {
     }
 
     public void mostrar() {
+        String libros = "";
+        for (int i = 0; i < nroLibros; i++) {
+            libros += L[i].toString() + "\n";
+        }
         String a = "";
-        a += "Prestamo{ci=" + ci + ", nroLibros=" + nroLibros + ", nombreLector=" + nombreLector + ", fechaPrestamo=" + fechaPrestamo + ", fechaDevolucion=" + fechaDevolucion;
+        a += "Prestamo{\n" +
+                "\tci=" + ci + "\n" +
+                "\tnroLibros=" + nroLibros + "\n" +
+                "\tnombreLector=" + nombreLector + "\n" +
+                "\tfechaPrestamo=" + fechaPrestamo + "\n" +
+                "\tfechaDevolucion=" + fechaDevolucion + "\n" +
+                "\tLibros:" + "\n" +
+                "\t\t" + libros + "\n" +
+                "}";
     }
 
     @Override
