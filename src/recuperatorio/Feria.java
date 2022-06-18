@@ -30,8 +30,39 @@ public class Feria {
         System.out.println(".............................................");
         for (int i = 0; i < nroStand; i++) {
             if (stands[i] != null) {
-                System.out.println("----------> STAND" + (1 + i));
+                System.out.println("-----------------------------------> STAND" + (1 + i));
                 stands[i].mostrar();
+            }
+        }
+    }
+
+    public void realizarCompra() {
+
+    }
+
+    public void mayorInv() {
+        int codParticipante = 0;
+        int max = 0;
+
+        for (int i = 0; i < nroStand; i++) {
+            int total = 0;
+            if (stands[i] != null) {
+
+                Producto[] ps = stands[i].getProductos();
+                for (int j = 0; j < stands[i].getNroProductos(); j++) {
+                    total = total + ps[j].getPrecio();
+                }
+            }
+            if (total > max){
+                codParticipante = stands[i].getCodParticipante();
+            }
+        }
+
+        for (int i = 0; i < nroParticipantes; i++) {
+            if (participantes[i] != null){
+                if (participantes[i].getCodigo() == codParticipante){
+                    System.out.println("El participante con mayor inversión es: " + participantes[i].getNombre());
+                }
             }
         }
     }

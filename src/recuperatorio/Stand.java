@@ -19,7 +19,7 @@ public class Stand {
         System.out.println("------------------------------------------");
         for (int i = 0; i < nroProductos; i++) {
             if (productos[i] != null) {
-                System.out.println(productos[i]);
+                System.out.println("\t" + productos[i]);
             }
         }
     }
@@ -48,8 +48,8 @@ public class Stand {
         this.nroProductos = nroProductos;
     }
 
-    public Producto getProductos(int i) {
-        return productos[i];
+    public Producto[] getProductos() {
+        return productos;
     }
 
     public void setProducto(Producto producto) {
