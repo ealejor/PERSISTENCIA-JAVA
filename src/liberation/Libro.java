@@ -1,6 +1,7 @@
 package liberation;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Libro implements Serializable {
     private String nombre;
@@ -17,6 +18,19 @@ public class Libro implements Serializable {
         this.estado = estado;
     }
     public Libro(){}
+
+    public void leer(Scanner scanner){
+        System.out.print("Ingrese el título del libro: ");
+        this.nombre = scanner.next();
+        System.out.print("Ingrese el autor del libro: ");
+        this.autor = scanner.next();
+        System.out.print("Ingrese el número de páginas del libro: ");
+        this.nroPag = scanner.nextInt();
+        System.out.print("Ingrese el código del libro: ");
+        this.codigo = scanner.next();
+        System.out.print("Ingrese el estado del libro: ");
+        this.estado = scanner.next();
+    }
 
     @Override
     public String toString() {

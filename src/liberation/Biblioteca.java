@@ -1,6 +1,7 @@
 package liberation;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Biblioteca implements Serializable {
     private String nombre;
@@ -10,12 +11,19 @@ public class Biblioteca implements Serializable {
     private Prestamo[] prestamos;
     private Reserva[] reservas;
 
-    public Biblioteca(String bibliotecario, int nroReservas, int nroPrestamos){
+    public Biblioteca(String bibliotecario, int nroReservas, int nroPrestamos) {
         this.bibliotecario = new Bibliotecario(bibliotecario);
         this.nroReservas = nroReservas;
         this.nroPrestamos = nroPrestamos;
         this.prestamos = new Prestamo[this.nroPrestamos];
         this.reservas = new Reserva[this.nroReservas];
+    }
+
+    public Biblioteca() {
+    }
+
+    public void leer(Scanner scanner){
+
     }
 
     public String getNombre() {
@@ -54,15 +62,25 @@ public class Biblioteca implements Serializable {
         return prestamos;
     }
 
-    public void setPrestamos(Prestamo[] prestamos) {
-        this.prestamos = prestamos;
+    public void setPrestamos(Prestamo prestamo) {
+        for (int i = 0; i < nroPrestamos; i++) {
+            if (prestamos[i] == null){
+                prestamos[i] = prestamo;
+                break;
+            }
+        }
     }
 
     public Reserva[] getReservas() {
         return reservas;
     }
 
-    public void setReservas(Reserva[] reservas) {
-        this.reservas = reservas;
+    public void setReservas(Reserva reserva) {
+        for (int i = 0; i < nroReservas; i++) {
+            if (reservas[i] == null){
+                reservas[i] = reserva;
+                break;
+            }
+        }
     }
 }

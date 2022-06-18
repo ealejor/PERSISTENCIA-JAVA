@@ -1,17 +1,17 @@
-package liberation.file;
+package persistence;
 
-import liberation.Biblioteca;
+import liberation.file.MyObjectOutputStream;
 
 import java.io.*;
 
-public class ArchivoBiblioteca {
+public class Persistence<E> {
 
     private final File file;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
-    private Biblioteca biblioteca;
+    private E value;
 
-    public ArchivoBiblioteca(String name) {
+    public Persistence(String name) {
         this.file = new File(name);
     }
 
@@ -33,14 +33,14 @@ public class ArchivoBiblioteca {
         }
     }
 
-    public void alta(Biblioteca biblioteca) {
+    public void alta(E element) {
         try {
             if (file.length() > 0) {
                 oos = new MyObjectOutputStream(new FileOutputStream(file, true));
             } else {
                 oos = new ObjectOutputStream(new FileOutputStream(file));
             }
-            oos.writeObject(biblioteca);
+            oos.writeObject(value);
             oos.flush();
             oos.close();
             System.out.println("guardado correctamente");
@@ -51,7 +51,8 @@ public class ArchivoBiblioteca {
         }
     }
 
-    public void baja(Biblioteca b) {
+    @SuppressWarnings("unchecked")
+    public void baja(E element) {
         File temp = new File("tmp.txt");
         try {
             if (!temp.createNewFile()) System.out.println("error al crear el archivo aux");
@@ -62,9 +63,9 @@ public class ArchivoBiblioteca {
             ois = new ObjectInputStream(new FileInputStream(file));
             oos = new ObjectOutputStream(new FileOutputStream(temp));
             while (true) {
-                biblioteca = (Biblioteca) ois.readObject();
-                if (!biblioteca.equals(b)){
-                    oos.writeObject(biblioteca);
+                value = (E) ois.readObject();
+                if (!value.equals(element)) {
+                    oos.writeObject(value);
                 }
             }
 
@@ -89,11 +90,12 @@ public class ArchivoBiblioteca {
     public void cambio() throws IOException {
     }
 
+    @SuppressWarnings("unchecked")
     public void listar() {
         try {
             ois = new ObjectInputStream(new FileInputStream(file));
             while (true) {
-                biblioteca = (Biblioteca) ois.readObject();
+                value = (E) ois.readObject();
             }
         } catch (EOFException e) {
             try {

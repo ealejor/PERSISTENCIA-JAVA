@@ -1,19 +1,46 @@
 package liberation;
 
 import java.io.Serializable;
+import java.net.PortUnreachableException;
+import java.util.Scanner;
 
 public class Reserva implements Serializable {
-    private Libro[] L;
+
     private int ci;
-    private int nroLibros;
     private String nombreLector;
+
     private String fechaPrestamo;
+
+    private int nroLibros;
+    private Libro[] L;
 
     private Lector lector;
 
-    public Reserva(Lector lector) {
+    public Reserva(Lector lector, String fechaPrestamo, int nroLibros) {
         this.lector = lector;
         this.ci = lector.getCi();
+        this.nombreLector = lector.getNombre();
+        this.fechaPrestamo = fechaPrestamo;
+        this.nroLibros = nroLibros;
+    }
+
+    public Reserva() {
+    }
+
+    public void leer(Scanner scanner) {
+        System.out.println("------ RESERVAS DEL LECTOR ------");
+        System.out.print("Ingrese la fecha de préstamo: ");
+        this.fechaPrestamo = scanner.next();
+        System.out.print("Ingrese la cantidad de libros a prestarse: ");
+        this.nroLibros = scanner.nextInt();
+
+        this.L = new Libro[this.nroLibros];
+        Libro l = new Libro();
+        for (int i = 0; i < nroLibros; i++) {
+            System.out.println("LIBRO " + (i + 1));
+            l.leer(scanner);
+            this.L[i] = l;
+        }
     }
 
     @Override

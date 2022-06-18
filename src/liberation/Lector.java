@@ -1,18 +1,41 @@
 package liberation;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Lector implements Serializable {
     private String nombre;
     private int ci;
-    private Prestamo prestamo;
+
     private Reserva reserva;
+    private Prestamo prestamo;
 
     public Lector(String nombre, int ci) {
         this.nombre = nombre;
         this.ci = ci;
-        this.prestamo = new Prestamo(this);
-        this.reserva = new Reserva(this);
+    }
+
+    public Lector(Prestamo prestamo) {
+        this.prestamo = prestamo;
+    }
+
+    public Lector(Reserva reserva) {
+        this.reserva = reserva;
+    }
+
+    public Lector(Prestamo prestamo, Reserva reserva){
+        this.prestamo = prestamo;
+        this.reserva = reserva;
+    }
+
+    public Lector() {
+    }
+
+    public void leer(Scanner scanner) {
+        System.out.print("Ingrese el nombre del lector: ");
+        this.nombre = scanner.next();
+        System.out.print("Ingrese la cédula de identidad del lector: ");
+        this.ci = scanner.nextInt();
     }
 
     @Override

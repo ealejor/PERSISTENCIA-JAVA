@@ -24,7 +24,7 @@ public class ArchivoLector {
         }
     }
 
-    public void agregar(Lector lector) {
+    public void alta(Lector lector) {
         ObjectOutputStream oos;
         try {
             if (file.length() > 0){
@@ -41,6 +41,14 @@ public class ArchivoLector {
         } catch (IOException e) {
             System.out.println("IOException write");
         }
+    }
+
+    public void baja(){
+
+    }
+
+    public void cambio(){
+
     }
 
     public void listar() {

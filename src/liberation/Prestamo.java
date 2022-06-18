@@ -1,21 +1,49 @@
 package liberation;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Prestamo implements Serializable {
-    private Libro[] L;
     private int ci;
-    private int nroLibros;
     private String nombreLector;
+
     private String fechaPrestamo;
     private String fechaDevolucion;
 
+    private int nroLibros;
+    private Libro[] L;
+
     private Lector lector;
 
-    public Prestamo(Lector lector) {
+    public Prestamo(Lector lector, String fechaPrestamo, String fechaDevolucion, int nroLibros) {
         this.lector = lector;
         this.ci = lector.getCi();
         this.nombreLector = lector.getNombre();
+        this.fechaPrestamo = fechaPrestamo;
+        this.fechaDevolucion = fechaDevolucion;
+        this.nroLibros = nroLibros;
+        this.L = new Libro[this.nroLibros];
+    }
+
+    public Prestamo() {
+    }
+
+    public void leer(Scanner scanner) {
+        System.out.println("------ PRÉSTAMOS DEL LECTOR ------");
+        System.out.print("Ingrese la fecha de préstamo: ");
+        this.fechaPrestamo = scanner.next();
+        System.out.print("Ingrese la fecha de la devolución: ");
+        this.fechaDevolucion = scanner.next();
+        System.out.print("Ingrese la cantidad de libros a prestarse: ");
+        this.nroLibros = scanner.nextInt();
+
+        this.L = new Libro[this.nroLibros];
+        Libro l = new Libro();
+        for (int i = 0; i < nroLibros; i++) {
+            System.out.println("LIBRO " + (i + 1));
+            l.leer(scanner);
+            this.L[i] = l;
+        }
     }
 
     @Override
