@@ -10,8 +10,8 @@ classDiagram
     Animal : +Comida(cantidad)
     
     class Pato{
-        +color: int
-        +nadar()
+        -color: int
+        +nadar():void
     }
     
     Animal <|-- Pato
