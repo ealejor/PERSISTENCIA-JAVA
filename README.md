@@ -3,7 +3,7 @@ La persistencia de datos en Java se refiere a la capacidad de almacenar y recupe
 
 ```mermaid
 classDiagram
-    class Animal{
+    class Animal <<abstract>> {
         -edad:int
         -nombre:string
         +caminar():int
@@ -32,6 +32,10 @@ classDiagram
     class D{
         -a:int
         +b():string
+    }
+    
+    interface Swimmer{
+        +swim(): void
     }
 
     Animal <|-- Pato
