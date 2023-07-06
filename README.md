@@ -15,6 +15,11 @@ classDiagram
         +nadar():void
     }
     
-    Animal <|-- Pato
+    class Gallina{
+        -clase:string
+        +met():void
+    }
     
+    Animal <|-- Pato
+    Animal <|-- Gallina
 ```
