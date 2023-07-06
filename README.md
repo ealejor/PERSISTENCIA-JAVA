@@ -20,6 +20,23 @@ classDiagram
         +met():void
     }
     
+    class A{
+        -a:int
+        +b():string
+    }
+
+    class C{
+        -a:int
+        +b():string
+    }
+    class D{
+        -a:int
+        +b():string
+    }
+
     Animal <|-- Pato
     Animal <|-- Gallina
+    Gallina ..> A
+    Gallina ..* B
+    Pato --> C
 ```
