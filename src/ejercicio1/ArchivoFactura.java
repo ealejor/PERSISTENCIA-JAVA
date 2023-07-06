@@ -1,5 +1,7 @@
 package ejercicio1;
 
+import persistence.CustomObjectOutputStream;
+
 import java.io.*;
 
 public class ArchivoFactura {
@@ -26,7 +28,7 @@ public class ArchivoFactura {
         ObjectOutputStream oos = null;
         try {
             if (file.length() > 0){
-                oos = new MyObjectOutputStream(new FileOutputStream(file, true));
+                oos = new CustomObjectOutputStream(new FileOutputStream(file, true));
             } else {
                 oos = new ObjectOutputStream(new FileOutputStream(file));
             }

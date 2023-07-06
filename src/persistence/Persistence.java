@@ -1,70 +1,60 @@
 package persistence;
 
-import liberation.file.MyObjectOutputStream;
-
 import java.io.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class Persistence<E> {
-
-    private final File file;
+    //private final File file;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private E value;
 
-    public Persistence(String name) {
-        this.file = new File(name);
+    private Archive file;
+
+    private boolean log;
+
+    public Persistence(Archive file) {
+        this.file = file;
     }
 
-    public void crear() {
+    public void enableLogger(boolean log) {
+        this.log = log;
+    }
+
+    public boolean create(E element) {
         try {
-            if (file.createNewFile()) {
-                System.out.println("se ha creado el archivo con éxito");
+            if (file.getFile().length() > 0) {
+                oos = new CustomObjectOutputStream(new FileOutputStream(file.getFile(), true));
             } else {
-                System.out.println("el archivo ya ha sido creado anteriormente");
+                oos = new ObjectOutputStream(new FileOutputStream(file.getFile()));
             }
-        } catch (IOException e) {
-            System.out.println("no se ha podido crear el archivo, ruta invalida...");
-        }
-    }
-
-    public void eliminar() {
-        if (file.isFile()) {
-            if (!file.delete()) System.out.println("error al eliminar");
-        }
-    }
-
-    public void alta(E element) {
-        try {
-            if (file.length() > 0) {
-                oos = new MyObjectOutputStream(new FileOutputStream(file, true));
-            } else {
-                oos = new ObjectOutputStream(new FileOutputStream(file));
-            }
-            oos.writeObject(value);
+            oos.writeObject(element);
             oos.flush();
             oos.close();
-            System.out.println("guardado correctamente");
+            if (log) System.out.println("guardado correctamente");
+            return true;
         } catch (FileNotFoundException e) {
-            System.out.println("archivo no encontrado");
+            if (log) System.out.println("archivo no encontrado");
         } catch (IOException e) {
-            System.out.println("error de entrada y salida");
+            if (log) System.out.println("error de entrada y salida");
         }
+        return false;
     }
 
-    @SuppressWarnings("unchecked")
-    public void baja(E element) {
+    public void delete(Function<E, Boolean> function) {
         File temp = new File("tmp.txt");
         try {
-            if (!temp.createNewFile()) System.out.println("error al crear el archivo aux");
+            if (!temp.createNewFile()) if (log) System.out.println("error al crear el archivo aux");
         } catch (IOException e) {
-            System.out.println("no se a podido crear el archivo aux");
+            if (log) System.out.println("no se a podido crear el archivo aux");
         }
         try {
-            ois = new ObjectInputStream(new FileInputStream(file));
+            ois = new ObjectInputStream(new FileInputStream(file.getFile()));
             oos = new ObjectOutputStream(new FileOutputStream(temp));
             while (true) {
                 value = (E) ois.readObject();
-                if (!value.equals(element)) {
+                if (!function.apply(value)) {
                     oos.writeObject(value);
                 }
             }
@@ -73,45 +63,113 @@ public class Persistence<E> {
             try {
                 if (ois != null) ois.close();
                 if (oos != null) oos.close();
-                file.delete();
-                temp.renameTo(file);
+                if (file.getFile().delete()) ;
+                if (temp.renameTo(file.getFile())) ;
             } catch (IOException exception) {
-                System.out.println("error de entrar y salida");
+                if (log) System.out.println("error de entrar y salida");
             }
         } catch (FileNotFoundException e) {
-            System.out.println("archivo no encontrado");
+            if (log) System.out.println("archivo no encontrado");
         } catch (ClassNotFoundException e) {
-            System.out.println("clase no encontrada");
+            if (log) System.out.println("clase no encontrada");
         } catch (IOException e) {
-            System.out.println("error de entrada y salida");
+            if (log) System.out.println("error de entrada y salida");
         }
     }
 
-    public void cambio() throws IOException {
-    }
-
     @SuppressWarnings("unchecked")
-    public void listar() {
+    public void update(Function<E, E> function) {
+        File temp = new File("tmp.txt");
         try {
-            ois = new ObjectInputStream(new FileInputStream(file));
+            if (!temp.createNewFile()) if (log) System.out.println("error al crear el archivo aux");
+        } catch (IOException e) {
+            if (log) System.out.println("no se a podido crear el archivo aux");
+        }
+        try {
+            ois = new ObjectInputStream(new FileInputStream(file.getFile()));
+            oos = new ObjectOutputStream(new FileOutputStream(temp));
             while (true) {
                 value = (E) ois.readObject();
+                E tmp = function.apply(value);
+                if (tmp != null) {
+                    oos.writeObject(tmp);
+                } else {
+                    oos.writeObject(value);
+                }
+            }
+
+        } catch (EOFException e) {
+            try {
+                if (ois != null) ois.close();
+                if (oos != null) oos.close();
+                if (file.getFile().delete()) ;
+                if (temp.renameTo(file.getFile())) ;
+            } catch (IOException exception) {
+                if (log) System.out.println("error de entrar y salida");
+            }
+        } catch (FileNotFoundException e) {
+            if (log) System.out.println("archivo no encontrado");
+        } catch (ClassNotFoundException e) {
+            if (log) System.out.println("clase no encontrada");
+        } catch (IOException e) {
+            if (log) System.out.println("error de entrada y salida");
+        }
+    }
+
+    /**
+     * Lista todos los elementos del archivo.
+     *
+     * @param callback función donde se recibe el objeto.
+     */
+    public void list(Consumer<E> callback) {
+        try {
+            ois = new ObjectInputStream(new FileInputStream(file.getFile()));
+            while (true) {
+                value = (E) ois.readObject();
+                callback.accept(value);
             }
         } catch (EOFException e) {
             try {
                 if (ois != null) {
                     ois.close();
-                    System.out.println("fin de lectura");
+                    if (log) System.out.println("fin de lectura");
                 }
             } catch (IOException ioe) {
-                System.out.println("error de entrada y salida");
+                if (log) System.out.println("error de entrada y salida");
             }
         } catch (FileNotFoundException e) {
-            System.out.println("archivo no encontrado");
+            if (log) System.out.println("archivo no encontrado");
         } catch (ClassNotFoundException e) {
-            System.out.println("clase no encontrada");
+            if (log) System.out.println("clase no encontrada");
         } catch (IOException e) {
-            System.out.println("error de entrada y salida");
+            if (log) System.out.println("error de entrada y salida");
         }
+    }
+
+
+    public static void main(String[] args) {
+        Archive in = new Archive("val.txt");
+        in.close();
+        in.open();
+        Persistence<Integer> integers = new Persistence<>(in);
+
+        integers.create(45);
+        integers.create(46);
+        integers.create(78);
+        integers.create(28);
+        integers.list(integer -> System.out.println("value: " + integer));
+
+        integers.delete(integer -> integer == 46);
+
+        integers.update(integer -> {
+            if (integer == 45) {
+                integer = 4555;
+                return integer;
+            } else {
+                return null;
+            }
+        });
+        System.out.println("----");
+        integers.list(integer -> System.out.println("value: " + integer));
     }
 }
