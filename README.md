@@ -55,11 +55,11 @@ classDiagram
 
     Lector *-- ArchivoLector
     Lector -- Préstamo
-    Libro --* Préstamo
-    Préstamo --* Biblioteca
+    Libro --o Préstamo
+    Préstamo --o Biblioteca
     Bibliotecario --* Biblioteca
-    Libro --* Reserva
-    Reserva --* Biblioteca
+    Libro --o Reserva
+    Reserva --o Biblioteca
     Biblioteca --* ArchivoBiblioteca
     Lector -- Reserva
 ```
