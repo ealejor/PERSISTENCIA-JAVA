@@ -39,4 +39,5 @@ classDiagram
     Gallina ..> A
     Gallina ..* B
     Pato --> C
+    Pato --o D
 ```
