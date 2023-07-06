@@ -45,7 +45,7 @@ classDiagram
 
     Animal "1" <|-- "*" Pato
     Animal <|-- Gallina
-    Gallina ..> A
+    Gallina ..> A : es un
     Gallina ..* B
     Pato --> C
     Pato --o D
