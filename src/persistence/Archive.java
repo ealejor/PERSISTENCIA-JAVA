@@ -29,7 +29,7 @@ public class Archive {
         }
     }
 
-    public File getFile() {
+    public File get() {
         return file;
     }
 }

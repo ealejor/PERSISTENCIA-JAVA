@@ -24,10 +24,10 @@ public class Persistence<E> {
 
     public boolean create(E element) {
         try {
-            if (file.getFile().length() > 0) {
-                oos = new CustomObjectOutputStream(new FileOutputStream(file.getFile(), true));
+            if (file.get().length() > 0) {
+                oos = new CustomObjectOutputStream(new FileOutputStream(file.get(), true));
             } else {
-                oos = new ObjectOutputStream(new FileOutputStream(file.getFile()));
+                oos = new ObjectOutputStream(new FileOutputStream(file.get()));
             }
             oos.writeObject(element);
             oos.flush();
@@ -50,7 +50,7 @@ public class Persistence<E> {
             if (log) System.out.println("no se a podido crear el archivo aux");
         }
         try {
-            ois = new ObjectInputStream(new FileInputStream(file.getFile()));
+            ois = new ObjectInputStream(new FileInputStream(file.get()));
             oos = new ObjectOutputStream(new FileOutputStream(temp));
             while (true) {
                 value = (E) ois.readObject();
@@ -63,8 +63,8 @@ public class Persistence<E> {
             try {
                 if (ois != null) ois.close();
                 if (oos != null) oos.close();
-                if (file.getFile().delete()) ;
-                if (temp.renameTo(file.getFile())) ;
+                if (file.get().delete()) ;
+                if (temp.renameTo(file.get())) ;
             } catch (IOException exception) {
                 if (log) System.out.println("error de entrar y salida");
             }
@@ -86,7 +86,7 @@ public class Persistence<E> {
             if (log) System.out.println("no se a podido crear el archivo aux");
         }
         try {
-            ois = new ObjectInputStream(new FileInputStream(file.getFile()));
+            ois = new ObjectInputStream(new FileInputStream(file.get()));
             oos = new ObjectOutputStream(new FileOutputStream(temp));
             while (true) {
                 value = (E) ois.readObject();
@@ -102,8 +102,8 @@ public class Persistence<E> {
             try {
                 if (ois != null) ois.close();
                 if (oos != null) oos.close();
-                if (file.getFile().delete()) ;
-                if (temp.renameTo(file.getFile())) ;
+                if (file.get().delete()) ;
+                if (temp.renameTo(file.get())) ;
             } catch (IOException exception) {
                 if (log) System.out.println("error de entrar y salida");
             }
@@ -123,7 +123,7 @@ public class Persistence<E> {
      */
     public void list(Consumer<E> callback) {
         try {
-            ois = new ObjectInputStream(new FileInputStream(file.getFile()));
+            ois = new ObjectInputStream(new FileInputStream(file.get()));
             while (true) {
                 value = (E) ois.readObject();
                 callback.accept(value);
