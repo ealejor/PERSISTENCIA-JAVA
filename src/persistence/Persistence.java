@@ -25,7 +25,7 @@ public class Persistence<E> {
     public boolean create(E element) {
         try {
             if (file.get().length() > 0) {
-                oos = new CustomObjectOutputStream(new FileOutputStream(file.get(), true));
+                oos = new MyStream(new FileOutputStream(file.get(), true));
             } else {
                 oos = new ObjectOutputStream(new FileOutputStream(file.get()));
             }
@@ -171,5 +171,16 @@ public class Persistence<E> {
         });
         System.out.println("----");
         integers.list(integer -> System.out.println("value: " + integer));
+    }
+
+    public static class MyStream extends ObjectOutputStream {
+
+        public MyStream(OutputStream out) throws IOException {
+            super(out);
+        }
+
+        protected void writeStreamHeader() throws IOException {
+            this.reset();
+        }
     }
 }
